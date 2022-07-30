@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
+from getpass import getpass
 from pynput.mouse import Listener, Button
 
-PIN = "1101"
-PIN_LENGTH = len(PIN)
+print("Type 'l' for left click and 'r' for right click")
+print("Example: rrlr, llllr")
+print()
+PASSWORD = getpass("Enter password: ")
+PASS_LENGTH = len(PASSWORD)
 user_pin = ""
 
 
@@ -10,16 +14,16 @@ def on_click(x, y, button, pressed):
     global user_pin
     # Detect left and right mouse clicks
     if pressed and button == Button.left:
-        user_pin = user_pin + "1"
-        print(user_pin)     # debugging
+        user_pin = user_pin + "l"
+        # print(user_pin)     # debugging
     elif pressed and button == Button.right:
-        user_pin = user_pin + "0"
-        print(user_pin)     # debugging
+        user_pin = user_pin + "r"
+        # print(user_pin)     # debugging
 
     # Stop monitoring mouse clicks when max pin length is reached
-    if len(user_pin) == PIN_LENGTH:
+    if len(user_pin) == PASS_LENGTH:
         # Show whether password is right or not
-        if user_pin == PIN:
+        if user_pin == PASSWORD:
             print("Correct password")
         else:
             print("Wrong password")
